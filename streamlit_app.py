@@ -6,6 +6,10 @@ import os
 import sys
 import tempfile
 
+URL = (
+    "https://github.com/navneetsingh-cpu/number-plate-detector/raw/main/models/best.pt"
+)
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from detect_and_recognize import detect_number_plates, recognize_number_plates
 
@@ -27,7 +31,7 @@ if uploaded_file is not None:
         f.write((uploaded_file).getbuffer())
     with st.spinner("In progress ...🛠"):
         # load the model from the local directory
-        model = YOLO("../models/best.pt")
+        model = YOLO(URL)
         # initialize the EasyOCR reader
         reader = Reader(["en"], gpu=True)
 
