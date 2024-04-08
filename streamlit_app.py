@@ -4,6 +4,7 @@ from easyocr import Reader
 import cv2
 import os
 import sys
+import tempfile
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from detect_and_recognize import detect_number_plates, recognize_number_plates
@@ -20,7 +21,8 @@ upload_path = "uploads"
 if uploaded_file is not None:
     # construct the path to the uploaded image
     # and then save it in the `uploads` folder
-    image_path = os.path.sep.join([upload_path, uploaded_file.name])
+    temp_dir = tempfile.mkdtemp()
+    image_path = os.path.sep.join([temp_dir, uploaded_file.name])
     with open(image_path, "wb") as f:
         f.write((uploaded_file).getbuffer())
     with st.spinner("In progress ...🛠"):
